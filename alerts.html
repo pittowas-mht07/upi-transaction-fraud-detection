@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShieldAnalytics - Alerts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-surface": "#191c1e",
+                    "surface": "#f7f9fb",
+                    "surface-dim": "#d8dadc",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary": "#000000",
+                    "secondary-fixed": "#d5e3fd",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary-fixed": "#131b2e",
+                    "on-primary-container": "#7c839b",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "surface-container-high": "#e6e8ea",
+                    "inverse-primary": "#bec6e0",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "primary": "#000000",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-tint": "#565e74",
+                    "tertiary-fixed": "#d3e4fe",
+                    "error": "#ba1a1a",
+                    "surface-container": "#eceef0",
+                    "surface-bright": "#f7f9fb",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#57657b",
+                    "on-tertiary-container": "#75859d",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#d5e3fd",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface-variant": "#45464d",
+                    "tertiary-container": "#0b1c30",
+                    "on-background": "#191c1e",
+                    "surface-variant": "#e0e3e5",
+                    "background": "#f7f9fb",
+                    "outline": "#76777d",
+                    "outline-variant": "#c6c6cd",
+                    "secondary": "#515f74"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "grid-gutter": "24px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "container-margin": "24px",
+                    "md": "16px",
+                    "sm": "12px",
+                    "xs": "8px"
+            },
+            "fontFamily": {
+                    "h2": ["Inter"],
+                    "data-mono": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style type="text/tailwindcss">
+      @layer utilities {
+        .material-symbols-outlined {
+          font-family: 'Material Symbols Outlined';
+          font-weight: normal;
+          font-style: normal;
+          font-size: 24px;
+          line-height: 1;
+          letter-spacing: normal;
+          text-transform: none;
+          display: inline-block;
+          white-space: nowrap;
+          word-wrap: normal;
+          direction: ltr;
+          -webkit-font-feature-settings: 'liga';
+          -webkit-font-smoothing: antialiased;
+        }
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background h-full font-body-md overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full p-md gap-xs bg-surface-container-low dark:bg-primary-container text-primary dark:text-on-primary-container font-body-md text-body-md font-medium docked left-0 h-full w-64 fixed border-r border-outline-variant dark:border-outline-variant flat no shadows z-40">
+<div class="flex items-center gap-sm mb-lg px-xs">
+<img alt="ShieldAnalytics Logo" class="w-8 h-8 rounded-full" data-alt="ShieldAnalytics logo, minimal flat vector design, professional financial tech aesthetic, navy blue and slate grey, shield and data visualization icon, white background, high contrast, clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfqgpLPI4xUl4RM7Vq1s5Moon7iPaKULtHKfI-UjYZdMEmgPKhCv_1YHUyOxAXu2cLXJWhjEtFgBcKf25X3iCbwcFmFGzI74t-TPd-zOW4rrAPEWnKBLATqD3YPbkTbsHTZZYv0gvuIoKL78606NhG4w0hYL6wUHyE-dJeqlbH6dym6qWdhCaiJhvKl0YV-xMbq9tzkZr117mnUG36VePaUk0w5IvPGVXSOZ2lAzdsQPgs0NO-sK-Fl9zU0ozMnPKUH2iFJPqxTRc"/>
+<div>
+<h1 class="font-h2 text-h2 font-black text-primary dark:text-on-primary-fixed">ShieldAnalytics</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Fraud Detection Unit</p>
+</div>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-on-primary hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-on-primary hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Transactions
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg bg-secondary-container dark:bg-on-primary-fixed-variant text-on-secondary-container dark:text-on-primary font-semibold Active: scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                Alerts
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-on-primary hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+                Reports
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-on-primary hover:bg-surface-container-high dark:hover:bg-on-primary-fixed-variant transition-all duration-200 mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 h-full relative">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-lg py-md h-16 bg-surface dark:bg-surface-container-lowest text-primary dark:text-on-primary-fixed font-h3 text-h3 font-semibold text-on-surface dark:text-on-surface docked full-width top-0 z-50 border-b border-outline-variant dark:border-outline-variant shadow-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined cursor-pointer" data-icon="menu">menu</span>
+<span class="font-h3 text-h3 font-bold text-primary dark:text-primary-fixed">ShieldAnalytics</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-xs" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-xs" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-lg bg-background flex gap-grid-gutter">
+<!-- Alerts List -->
+<div class="flex-1 flex flex-col gap-md">
+<div class="flex justify-between items-center mb-sm">
+<h2 class="font-h1 text-h1 text-on-surface">Active Alerts</h2>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md py-xs border border-outline rounded-DEFAULT text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-xs px-md py-xs border border-outline rounded-DEFAULT text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="sort">sort</span>
+                            Sort
+                        </button>
+</div>
+</div>
+<!-- Alert Card 1 (Critical) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col gap-md hover:shadow-sm transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-[#ffdad6] flex items-center justify-center text-[#ba1a1a]">
+<span class="material-symbols-outlined" data-icon="gavel" data-weight="fill" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Suspicious Transfer Activity</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="px-xs py-base rounded bg-[#ffdad6] text-[#ba1a1a] font-label-sm text-label-sm">Critical</span>
+<span class="text-on-surface-variant font-data-mono text-data-mono text-[12px]">ID: SA-992-A</span>
+<span class="text-on-surface-variant text-[12px]">• 2 mins ago</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-xs">AI Confidence</div>
+<div class="flex items-center gap-sm">
+<div class="w-16 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-[#ba1a1a] w-[95%]"></div>
+</div>
+<span class="font-data-mono text-data-mono text-[#ba1a1a]">95%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-md border-y border-outline-variant py-sm">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Source IP</div>
+<div class="font-data-mono text-data-mono text-on-surface">192.168.1.105 (RU)</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Target Account</div>
+<div class="font-data-mono text-data-mono text-on-surface">****4921</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Potential Impact</div>
+<div class="font-body-md text-body-md text-on-surface font-semibold">$145,000.00</div>
+</div>
+</div>
+<div class="flex justify-end gap-sm">
+<button class="px-md py-xs border border-outline rounded-DEFAULT text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">Dismiss</button>
+<button class="px-md py-xs bg-secondary text-on-secondary rounded-DEFAULT font-label-sm text-label-sm hover:bg-surface-tint transition-colors">Escalate</button>
+<button class="px-md py-xs bg-error text-on-error rounded-DEFAULT font-label-sm text-label-sm hover:bg-[#93000a] transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="block">block</span>
+                            Block IP
+                        </button>
+</div>
+</div>
+<!-- Alert Card 2 (High) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col gap-md hover:shadow-sm transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-[#ffeed5] flex items-center justify-center text-[#b06000]">
+<span class="material-symbols-outlined" data-icon="login" data-weight="fill" style="font-variation-settings: 'FILL' 1;">login</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Multiple Failed Logins</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="px-xs py-base rounded bg-[#ffeed5] text-[#b06000] font-label-sm text-label-sm">High</span>
+<span class="text-on-surface-variant font-data-mono text-data-mono text-[12px]">ID: SA-991-B</span>
+<span class="text-on-surface-variant text-[12px]">• 15 mins ago</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-xs">AI Confidence</div>
+<div class="flex items-center gap-sm">
+<div class="w-16 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-[#b06000] w-[82%]"></div>
+</div>
+<span class="font-data-mono text-data-mono text-[#b06000]">82%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-md border-y border-outline-variant py-sm">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Source IP</div>
+<div class="font-data-mono text-data-mono text-on-surface">45.22.11.9 (CN)</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Target Account</div>
+<div class="font-data-mono text-data-mono text-on-surface">Admin_Root</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Attempts</div>
+<div class="font-body-md text-body-md text-on-surface font-semibold">24 in 5 mins</div>
+</div>
+</div>
+<div class="flex justify-end gap-sm">
+<button class="px-md py-xs border border-outline rounded-DEFAULT text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">Dismiss</button>
+<button class="px-md py-xs bg-secondary text-on-secondary rounded-DEFAULT font-label-sm text-label-sm hover:bg-surface-tint transition-colors">Escalate</button>
+<button class="px-md py-xs bg-error text-on-error rounded-DEFAULT font-label-sm text-label-sm hover:bg-[#93000a] transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="block">block</span>
+                            Block IP
+                        </button>
+</div>
+</div>
+<!-- Alert Card 3 (Medium) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col gap-md hover:shadow-sm transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="public" data-weight="fill" style="font-variation-settings: 'FILL' 1;">public</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Unusual Geo-Location</h3>
+<div class="flex items-center gap-xs mt-xs">
+<span class="px-xs py-base rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">Medium</span>
+<span class="text-on-surface-variant font-data-mono text-data-mono text-[12px]">ID: SA-990-C</span>
+<span class="text-on-surface-variant text-[12px]">• 1 hr ago</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-xs">AI Confidence</div>
+<div class="flex items-center gap-sm">
+<div class="w-16 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[65%]"></div>
+</div>
+<span class="font-data-mono text-data-mono text-secondary">65%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-md border-y border-outline-variant py-sm">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Source IP</div>
+<div class="font-data-mono text-data-mono text-on-surface">104.28.19.4 (BR)</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Target Account</div>
+<div class="font-data-mono text-data-mono text-on-surface">****2281</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Previous Location</div>
+<div class="font-body-md text-body-md text-on-surface font-semibold">US (2 hrs ago)</div>
+</div>
+</div>
+<div class="flex justify-end gap-sm">
+<button class="px-md py-xs border border-outline rounded-DEFAULT text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">Dismiss</button>
+<button class="px-md py-xs bg-secondary text-on-secondary rounded-DEFAULT font-label-sm text-label-sm hover:bg-surface-tint transition-colors">Escalate</button>
+</div>
+</div>
+</div>
+<!-- Summary Sidebar -->
+<aside class="w-80 hidden xl:flex flex-col gap-md">
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md">
+<h3 class="font-h3 text-h3 text-on-surface mb-md">Alert Summary</h3>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-DEFAULT border border-outline-variant">
+<div class="flex items-center gap-sm">
+<div class="w-3 h-3 rounded-full bg-[#ba1a1a]"></div>
+<span class="font-body-md text-body-md text-on-surface">Critical</span>
+</div>
+<span class="font-h3 text-h3 font-bold text-[#ba1a1a]">12</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-DEFAULT border border-outline-variant">
+<div class="flex items-center gap-sm">
+<div class="w-3 h-3 rounded-full bg-[#b06000]"></div>
+<span class="font-body-md text-body-md text-on-surface">High</span>
+</div>
+<span class="font-h3 text-h3 font-bold text-[#b06000]">34</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-DEFAULT border border-outline-variant">
+<div class="flex items-center gap-sm">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-body-md text-body-md text-on-surface">Medium</span>
+</div>
+<span class="font-h3 text-h3 font-bold text-secondary">89</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-DEFAULT border border-outline-variant">
+<div class="flex items-center gap-sm">
+<div class="w-3 h-3 rounded-full bg-outline"></div>
+<span class="font-body-md text-body-md text-on-surface">Low</span>
+</div>
+<span class="font-h3 text-h3 font-bold text-on-surface-variant">210</span>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-outline-variant">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-sm">AI Escalation Rate</div>
+<div class="flex items-end gap-xs">
+<span class="font-h1 text-h1 text-on-surface leading-none">18.4%</span>
+<span class="flex items-center text-[#ba1a1a] font-label-sm text-label-sm pb-[4px]">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                                +2.1%
+                            </span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>
